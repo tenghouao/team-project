@@ -38,21 +38,21 @@ As a user, I want to see the weather information of an event based on its date, 
 
 ## Use Cases
 
-### Use Case: Create an event
+### Use Case 1: Create an event
 
-### Use Case: Edit an event
+### Use Case 2: Edit an event
 
-### Use Case: Delete an event
+### Use Case 3: Delete an event
 
-### Use Case: Create a recurring event
+### Use Case 4: Create a recurring event
 
-### Use Case: Save created events
+### Use Case 5: Save created events
 
-### Use Case: Receive weather information of an event
+### Use Case 6: Receive weather information
 
-### Use Case: Receive weather information of a day?
+### Use Case 7: Save received weather information
 
-### Use Case: Save received weather information
+### Use Case 8: Daily schedule suggestion based on weather information
 
 ---
 
@@ -60,22 +60,16 @@ As a user, I want to see the weather information of an event based on its date, 
 
 | Team Member | MVP Use Case |
 |-------------|--------------|
-| Teng Hou Ao | Use Case |
-| Chihiro Mori | Use Case |
-| Tobey Zhao | Use Case |
-| Rock Qiu | Use Case |
+| Teng Hou Ao | 5, 7 |
+| Chihiro Mori | 1, 2, 3, 4 |
+| Tobey Zhao | 6, 8 |
+| Rock Qiu | UI |
 
 ---
 
 ## Entities
 
-### Event
-
-### DailyWeather
-
-### Day
-
-### Week/Month/Year?
+### Activity
 
 ---
 
