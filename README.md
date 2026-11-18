@@ -20,19 +20,21 @@ WeatherWise is a Java to-do list/calendar application combined with weather fore
 
 ## User Stories
 
-As a user, I want to see my events and the weather information of a selected day so that I can schedule that day. day/weekly?
+As a user, I want to see my events and the hourly weather forecast for a selected day so that I can plan that day.
 
-As a user, I want to create events with a specific date, time range, and an optional location so that I can plan my schedule.
+As a user, I want to create an event with a name, a date, a category (indoor or outdoor), an optional location, and either a fixed time range or a flexible duration so that I can plan my schedule.
 
-As a user, I want to edit the date, time range, and location of an event so that I can change my schedule.
+As a user, I want to edit the name, date, time, category, and location of an event so that I can change my schedule.
 
-As a user, I want to delete an event so that I can change my schedule.
+As a user, I want to delete an event so that I can remove plans that are no longer happening.
 
-As a user, I want to create an event with a recurring schedule so that I don't need to re-enter it.
+As a user, I want to create an event that repeats on selected days of the week so that I don't need to re-enter my routine.
 
-As a user, I want my created events to be saved so I don't need to re-enter them every time I use the application.
+As a user, I want my events to be saved so that I don't need to re-enter them every time I use the application.
 
-As a user, I want to see the weather information of an event based on its date, time range, and location so that I can plan my event.
+As a user, I want to see whether the weather is suitable for an event based on its date, time, and location so that I can decide whether to keep or move it.
+
+As a user, I want the application to suggest a daily schedule that places my flexible events in time slots with suitable weather so that I can avoid planning outdoor activities during bad weather.
 
 ---
 
