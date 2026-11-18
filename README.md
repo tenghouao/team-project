@@ -47,6 +47,21 @@ As a user, I want to see the weather information of an event based on its date, 
 ### Use Case 4: Create a recurring event
 
 ### Use Case 5: Save created events
+**Primary actor:** The application
+
+**Preconditions:**
+* The newly saved activities are not the same as the previously saved activities.
+
+**Trigger:** The application closes / An activity is created/modified/edited (need to decide)
+
+**Success outcome:** All saved activities remain after the application closes and reopens.
+
+**Main success scenario:**
+1. The trigger event occurs.
+2. All activities and their properties are saved in a json file.
+3. Application closes.
+4. Application reopens.
+5. Saved activities remain in the application.
 
 ### Use Case 6: Fetch and Evaluate Daily Weather Data
 * **Name:** Fetch and Evaluate Daily Weather Data
@@ -69,6 +84,19 @@ As a user, I want to see the weather information of an event based on its date, 
     * *Step 3b (Invalid city name):* The external service cannot find the requested city. The system prompts the user to enter a valid city name.
 
 ### Use Case 7: Save received weather information
+**Primary actor:** The application
+
+**Preconditions:**
+* The received weather information is not already stored.
+
+**Trigger:** The application receives weather information from the api.
+
+**Success outcome:** The application saves the received weather information to be used when needed without creating another api call.
+
+**Main success scenario:**
+1. Weather information is received.
+2. Weather information is saved in a json? file.
+3. When the weather information is needed, the application can retrieve it.
 
 ### Use Case 8: Generate Weather-Aware Daily Schedule
 * **Name:** Generate Weather-Aware Daily Schedule
