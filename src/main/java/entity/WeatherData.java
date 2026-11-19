@@ -1,42 +1,96 @@
 package entity;
 
 /**
- * Represents hourly weather forecast data for a specific hour of the day.
+ * Core entity storing daily weather forecast metrics for a specific City and date.
  */
 public class WeatherData {
 
-    private final int hour;                         // Hour of the day (0 to 23)
-    private final double temperatureCelsius;        // Temperature in Celsius
-    private final int precipitationProbability;     // Rain/snow probability (0 to 100%)
-    private final double windSpeedKmh;              // Wind speed in km/h
-    private final String conditionDescription;      // e.g., "Clear", "Rain", "Cloudy"
+    private final String date;
+    private final City city;
+    private final double temperature;
+    private final double precipitation;
+    private final double windSpeed;
+    private final String condition;
 
-    public WeatherData(int hour, double temperatureCelsius, int precipitationProbability,
-                       double windSpeedKmh, String conditionDescription) {
-        this.hour = hour;
-        this.temperatureCelsius = temperatureCelsius;
-        this.precipitationProbability = precipitationProbability;
-        this.windSpeedKmh = windSpeedKmh;
-        this.conditionDescription = conditionDescription;
+    /**
+     * Constructs a WeatherData entity for a given date and city.
+     *
+     * @param date          the forecast date in "YYYY-MM-DD" format
+     * @param city          the City enum for this weather record
+     * @param temperature   the daily maximum temperature in degrees Celsius
+     * @param precipitation the daily total precipitation in millimeters
+     * @param windSpeed     the daily maximum wind speed in km/h
+     * @param condition     a short text description of the weather condition
+     */
+    public WeatherData(String date, City city, double temperature,
+                       double precipitation, double windSpeed, String condition) {
+        if (date != null) {
+            this.date = date.trim();
+        } else {
+            this.date = "";
+        }
+        this.city = city;
+        this.temperature = temperature;
+        this.precipitation = precipitation;
+        this.windSpeed = windSpeed;
+        if (condition != null) {
+            this.condition = condition;
+        } else {
+            this.condition = "Unknown";
+        }
     }
 
-    public int getHour() {
-        return hour;
+    /**
+     * Returns the date of this weather forecast.
+     *
+     * @return the date string in "YYYY-MM-DD" format
+     */
+    public String getDate() {
+        return date;
     }
 
-    public double getTemperatureCelsius() {
-        return temperatureCelsius;
+    /**
+     * Returns the City for this weather forecast.
+     *
+     * @return the City enum constant
+     */
+    public City getCity() {
+        return city;
     }
 
-    public int getPrecipitationProbability() {
-        return precipitationProbability;
+    /**
+     * Returns the daily maximum temperature.
+     *
+     * @return the temperature in degrees Celsius
+     */
+    public double getTemperature() {
+        return temperature;
     }
 
-    public double getWindSpeedKmh() {
-        return windSpeedKmh;
+    /**
+     * Returns the daily total precipitation.
+     *
+     * @return the precipitation in millimeters
+     */
+    public double getPrecipitation() {
+        return precipitation;
     }
 
-    public String getConditionDescription() {
-        return conditionDescription;
+    /**
+     * Returns the daily maximum wind speed.
+     *
+     * @return the wind speed in km/h
+     */
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    /**
+     * Returns the human-readable weather condition summary.
+     *
+     * @return the weather condition description
+     */
+    public String getCondition() {
+        return condition;
     }
 }

@@ -1,42 +1,51 @@
 package entity;
 
 /**
- * Represents an activity that has been assigned a specific time slot and weather suitability score.
+ * Core entity representing an Activity assigned to a concrete hourly time slot.
  */
 public class ScheduledActivity {
 
     private final Activity activity;
-    private final int assignedStartHour;     // e.g., 10 (meaning 10:00)
-    private final int assignedEndHour;       // e.g., 12 (meaning 12:00)
-    private final int suitabilityScore;      // 0 to 100
-    private final String explanation;        // e.g., "Score 85: Dry and mild (18°C)"
+    private final int startHour;
+    private final int endHour;
 
-    public ScheduledActivity(Activity activity, int assignedStartHour, int assignedEndHour,
-                             int suitabilityScore, String explanation) {
+    /**
+     * Constructs a ScheduledActivity with its assigned start and end hours.
+     *
+     * @param activity  the Activity entity being scheduled
+     * @param startHour the assigned start hour (0-23)
+     * @param endHour   the assigned end hour (1-24)
+     */
+    public ScheduledActivity(Activity activity, int startHour, int endHour) {
         this.activity = activity;
-        this.assignedStartHour = assignedStartHour;
-        this.assignedEndHour = assignedEndHour;
-        this.suitabilityScore = suitabilityScore;
-        this.explanation = explanation;
+        this.startHour = startHour;
+        this.endHour = endHour;
     }
 
+    /**
+     * Returns the Activity entity assigned to this slot.
+     *
+     * @return the scheduled Activity
+     */
     public Activity getActivity() {
         return activity;
     }
 
-    public int getAssignedStartHour() {
-        return assignedStartHour;
+    /**
+     * Returns the assigned start hour of this activity.
+     *
+     * @return the start hour (0-23)
+     */
+    public int getStartHour() {
+        return startHour;
     }
 
-    public int getAssignedEndHour() {
-        return assignedEndHour;
-    }
-
-    public int getSuitabilityScore() {
-        return suitabilityScore;
-    }
-
-    public String getExplanation() {
-        return explanation;
+    /**
+     * Returns the assigned end hour of this activity.
+     *
+     * @return the end hour (1-24)
+     */
+    public int getEndHour() {
+        return endHour;
     }
 }
