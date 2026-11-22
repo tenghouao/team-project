@@ -172,7 +172,7 @@ As a user, I want the application to suggest a daily schedule that places my fle
 **Preconditions:**
 * The newly saved activities are not the same as the previously saved activities.
 
-**Trigger:** The application closes / An activity is created/modified/edited (need to decide)
+**Trigger:** An activity is created/modified/edited
 
 **Success outcome:** All saved activities remain after the application closes and reopens.
 
@@ -215,7 +215,7 @@ As a user, I want the application to suggest a daily schedule that places my fle
 
 **Main success scenario:**
 1. Weather information is received.
-2. Weather information is saved in a json? file.
+2. Weather information is saved in a json file.
 3. When the weather information is needed, the application can retrieve it.
 
 ### Use Case 8: Generate Weather-Aware Daily Schedule
