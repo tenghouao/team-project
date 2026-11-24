@@ -216,30 +216,74 @@ public final class ActivityRules {
     }
 
     /**
-     * Checks a recurring time range against the routine of each given day.
+     * Checks a recurring time range against
+     * (1) the recurring routine of each given day, and
+     * (2) every upcoming one-time event whose date falls on one of those days.
      *
-     * @param dataAccess  the data access object to read routines from
+     * @param dataAccess  the data access object to read activities from
      * @param daysOfWeek  normalized day names to check
      * @param startHour   the start hour of the recurring activity
      * @param durationHrs the duration of the recurring activity
      * @param excludeId   the ID of the activity being edited, or null
-     * @return a warning listing the conflicting days and activities, or null if none overlap
+     * @return a warning listing the conflicting days, dates, and activities,
+     *         one per line, or null if nothing overlaps
      */
-    public static String checkOverlapsOnDays(EventDataAccessInterface dataAccess,
+    public static String checkOverlapsOnDays(ActivityDataAccessInterface dataAccess,
                                              List<String> daysOfWeek, int startHour,
                                              int durationHrs, String excludeId) {
         List<String> lines = new ArrayList<>();
+
+        // (1) Weekly conflicts with other recurring activities.
         for (String day : daysOfWeek) {
             List<Activity> overlaps = findOverlaps(dataAccess, null, day,
                     startHour, durationHrs, excludeId);
             if (!overlaps.isEmpty()) {
-                lines.add(capitalize(day) + ": " + describeOverlaps(overlaps));
+                lines.add("Every " + capitalize(day) + ": " + describeOverlaps(overlaps));
             }
         }
+
+        // (2) Conflicts with upcoming one-time events on the same weekdays.
+        List<Activity> oneTimeOverlaps = new ArrayList<>();
+        List<Activity> oneTimeActivities = dataAccess.getAllOneTimeActivities();
+        if (oneTimeActivities != null) {
+            LocalDate today = LocalDate.now();
+            for (Activity other : oneTimeActivities) {
+                if (isUpcomingOverlap(other, daysOfWeek, startHour, durationHrs,
+                        excludeId, today)) {
+                    oneTimeOverlaps.add(other);
+                }
+            }
+        }
+        oneTimeOverlaps.sort((a, b) -> a.getDate().compareTo(b.getDate()));
+        for (Activity other : oneTimeOverlaps) {
+            lines.add(other.getDate() + " (" + capitalize(dayOfWeekOf(other.getDate())) + "): "
+                    + describeOverlaps(List.of(other)));
+        }
+
         if (lines.isEmpty()) {
             return null;
         }
         return String.join("\n", lines);
+    }
+
+    private static boolean isUpcomingOverlap(Activity other, List<String> daysOfWeek,
+                                             int startHour, int durationHrs,
+                                             String excludeId, LocalDate today) {
+        if (other == null || !other.isFixed() || other.getId().equals(excludeId)) {
+            return false;
+        }
+        if (validateDate(other.getDate()) != null) {
+            return false;
+        }
+        if (LocalDate.parse(other.getDate()).isBefore(today)) {
+            return false;
+        }
+        if (!daysOfWeek.contains(dayOfWeekOf(other.getDate()))) {
+            return false;
+        }
+        int otherStart = other.getFixedStartHour();
+        int otherEnd = otherStart + other.getDurationHours();
+        return startHour < otherEnd && otherStart < startHour + durationHrs;
     }
 
     private static String capitalize(String word) {
