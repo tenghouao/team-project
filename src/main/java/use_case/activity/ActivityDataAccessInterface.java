@@ -64,6 +64,14 @@ public interface ActivityDataAccessInterface extends EventDataAccessInterface {
     Activity getActivityById(String activityId);
 
     /**
+     * Returns every one-time activity (every activity whose date is not empty).
+     * Used to find one-time events that fall on the weekdays of a recurring activity.
+     *
+     * @return all one-time activities, or an empty list if there are none
+     */
+    List<Activity> getAllOneTimeActivities();
+
+    /**
      * Returns the days of the week a recurring activity repeats on.
      *
      * @param activityId the ID of the activity
